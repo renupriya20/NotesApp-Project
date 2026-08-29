@@ -15,63 +15,76 @@ const Navbar = () => {
         setUser(null);
         localStorage.removeItem("authUser");
         navigate("/login");
-        toast.success("Logout successfull");
+        toast.success("Logged out successfully");
     };
 
     const handleDeleteProfile = async (id) => {
+        const confirmed = window.confirm(
+            "Delete your account? This can't be undone."
+        );
+        if (!confirmed) return;
+
         try {
-            let resp = await AxiosInstance.delete(`/users/${id}`);
-            console.log(resp);
+            await AxiosInstance.delete(`/users/${id}`);
             setUser(null);
             localStorage.removeItem("authUser");
             navigate("/signup");
-            toast.success("Profile Deleted");
+            toast.success("Profile deleted");
         } catch (error) {
             console.log(error);
             toast.error("Unable to delete profile");
         }
     };
 
+    if (!user) return null;
+
     return (
-        <header className="py-8 px-40 flex justify-between items-center shadow">
-            <div className="flex gap-2 items-center font-extrabold text-3xl">
+        <header className="flex items-center justify-between border-b border-paper-line bg-paper px-4 py-5 sm:px-10 lg:px-20">
+            <Link
+                to="/"
+                className="flex items-center gap-2 font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl"
+            >
                 <figure>📖</figure>
                 <div>
-                    <span className="text-blue-500">Notes</span> App
+                    <span className="text-rule">Notes</span> App
                 </div>
-            </div>
+            </Link>
 
-            <nav className="flex items-center gap-5 font-semibold text-lg">
-                <Link to={"#"}>Features</Link>
-                <Link to={"#"}>Pricing</Link>
-                <Link to={"#"}>About</Link>
+            <nav className="flex items-center gap-4 sm:gap-5">
                 <div
                     onClick={handleMenuToggle}
-                    className=" cursor-pointer relative h-10 w-10 rounded-full bg-blue-500 text-white flex justify-center items-center font-bold"
+                    className="relative flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-ink font-mono font-bold text-paper"
                 >
-                    {user.username.charAt(0)}
+                    {user.username?.charAt(0).toUpperCase()}
 
                     {menuToggle && (
                         <ul
                             onClick={handleMenuToggle}
-                            className="bg-gray-50 absolute top-13 right-0 shadow-lg text-black p-5 font-normal min-w-50 cursor-pointer"
+                            className="card-index absolute right-0 top-13 min-w-52 cursor-pointer p-2 py-5 pl-8 text-left text-sm font-normal text-ink"
                         >
-                            <li className="py-2 px-5 hover:bg-white">My Account</li>
-                            <li className="py-2 px-5 hover:bg-white">Notes</li>
-                            <li
-                                className="py-2 px-5 hover:bg-white"
-                                onClick={() => handleDeleteProfile(user.id)}
-                            >
-                                Delete Profile
+                            <li className="px-4 py-2 text-ink-soft">
+                                Signed in as{" "}
+                                <span className="font-semibold text-ink">
+                                    {user.username}
+                                </span>
                             </li>
                             <Link
                                 to={`/edit-user/${user.id}`}
-                                className="py-2 px-5 hover:bg-white"
+                                className="block rounded px-4 py-2 hover:bg-paper"
                             >
                                 Update Profile
                             </Link>
-                            <li className="py-2 px-5 hover:bg-white" onClick={handleLogout}>
+                            <li
+                                className="rounded px-4 py-2 hover:bg-paper"
+                                onClick={handleLogout}
+                            >
                                 Logout
+                            </li>
+                            <li
+                                className="rounded px-4 py-2 text-rule hover:bg-rule-soft/40"
+                                onClick={() => handleDeleteProfile(user.id)}
+                            >
+                                Delete Profile
                             </li>
                         </ul>
                     )}

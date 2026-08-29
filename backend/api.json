@@ -84,5 +84,16 @@
       "password": "12345",
       "id": 14
     }
+  ],
+  "notes": [
+    {
+      "title": "javascript",
+      "content": "JavaScript is a lightweight, interpreted programming language used to make web pages\ninteractive and dynamic, running in the browser (and on servers via Node.js) to handle events,\nmanipulate the DOM, and communicate with servers.",
+      "userId": 14,
+      "pinned": false,
+      "createdAt": "2026-08-29T21:20:37.703Z",
+      "updatedAt": "2026-08-29T21:20:49.363Z",
+      "id": 1
+    }
   ]
 }

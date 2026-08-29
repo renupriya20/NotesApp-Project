@@ -1,1 +1,84 @@
 @import "tailwindcss";
+
+@theme {
+    /* type */
+    --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+    --font-display: "Fraunces", "Georgia", serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+    /* palette */
+    --color-paper: #f3f1e7;
+    --color-paper-line: #e2ddc8;
+    --color-card: #fffdf8;
+    --color-ink: #232b3d;
+    --color-ink-soft: #5b6478;
+    --color-ink-faint: #9aa1b0;
+    --color-rule: #c0392b;
+    --color-rule-soft: #e8b4ac;
+    --color-tape: #e8b23d;
+    --color-tape-soft: #fbecc7;
+    --color-ink-dark: #171d2a;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+}
+
+.bg-ruled {
+    background-image: repeating-linear-gradient(to bottom,
+            transparent,
+            transparent 35px,
+            var(--color-paper-line) 35px,
+            var(--color-paper-line) 36px);
+}
+
+.card-index {
+    position: relative;
+    background-color: var(--color-card);
+    border: 1px solid var(--color-paper-line);
+    border-top: 3px solid var(--color-rule);
+    border-radius: 6px;
+    box-shadow:
+        0 1px 2px rgba(35, 43, 61, 0.06),
+        0 6px 16px -4px rgba(35, 43, 61, 0.1);
+}
+
+.card-index::before,
+.card-index::after {
+    content: "";
+    position: absolute;
+    left: 14px;
+    width: 7px;
+    height: 7px;
+    border-radius: 9999px;
+    background: var(--color-paper);
+    border: 1px solid var(--color-paper-line);
+    box-shadow: inset 0 1px 2px rgba(35, 43, 61, 0.15);
+}
+
+.card-index::before {
+    top: 14px;
+}
+
+.card-index::after {
+    top: 30px;
+}
+
+.washi-tape {
+    position: absolute;
+    top: -10px;
+    right: 18px;
+    width: 44px;
+    height: 20px;
+    background: var(--color-tape);
+    opacity: 0.9;
+    transform: rotate(4deg);
+    box-shadow: 0 2px 4px rgba(35, 43, 61, 0.15);
+}
+
+::selection {
+    background: var(--color-tape-soft);
+    color: var(--color-ink);
+}
