@@ -80,7 +80,7 @@ cd backend
 npm install
 npm run dev
 
-This starts a mock REST API at  http://localhost:3000 , backed by api.json.
+This starts a mock REST API at  `http://localhost:3000` , backed by `api.json`.
 
 ### 3. Frontend setup
 Open a new terminal:
