@@ -42,7 +42,7 @@ A notes-taking web application with user authentication (signup, login, profile 
 ---
 
 ## 📂 Project Structure
-
+```
 
 NotesApp-Project/
 ├── backend/
@@ -59,7 +59,7 @@ NotesApp-Project/
     │   ├── config/            # Axios instance
     │   └── index.css          # design tokens (@theme)
     └── .env
-
+```
 
 ---
 
